@@ -44,14 +44,14 @@ export class WebsiteAScraper extends WebsiteCrawlerService {
           'h2 > a > span',
           (el) => el.textContent,
         );
-      } catch (error) {}
 
-      try {
         price = await producthandle.$eval(
           '.a-price > .a-offscreen',
           (el) => el.textContent,
         );
-      } catch (error) {}
+      } catch (error) {
+        throw new Error(error)
+      }
     }
 
     await this.closeBrowser();
